@@ -1,0 +1,29 @@
+/* OK button */
+"Accept" = "OK";
+
+/* Cancel button */
+"Cancel" = "Cancel";
+
+/* Clear all action */
+"ClearAll" = "Clear";
+
+/* Message of all clear dialog */
+"ClearDialogMessage" = "Do you really want to clear all?";
+
+/* Title of all clear dialog */
+"ClearDialogTitle" = "Clear";
+
+/* Computing a solution */
+"ComputingMessage" = "Computing...";
+
+/* Message of no solution dialog */
+"NoSolutionDialogMessage" = "There's no solution for this one.";
+
+/* Title of no solution dialog */
+"NoSolutionDialogTitle" = "No Solution...";
+
+/* No solution found */
+"NoSolutionMessage" = "No Solution...";
+
+/* Found the solution */
+"SolvedMessage" = "Solved!";

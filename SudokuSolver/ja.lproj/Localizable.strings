@@ -1,0 +1,30 @@
+/* OK button */
+"Accept" = "OK";
+
+/* Cancel button */
+"Cancel" = "キャンセル";
+
+/* Clear all action */
+"ClearAll" = "クリア";
+
+/* Message of all clear dialog */
+"ClearDialogMessage" = "本当にクリアしますか？";
+
+/* Title of all clear dialog */
+"ClearDialogTitle" = "クリア";
+
+/* Computing a solution */
+"ComputingMessage" = "計算中...";
+
+/* Message of no solution dialog */
+"NoSolutionDialogMessage" = "この問題には解がありません。";
+
+/* Title of no solution dialog */
+"NoSolutionDialogTitle" = "解がありません...";
+
+/* No solution found */
+"NoSolutionMessage" = "解がありません...";
+
+/* Found the solution */
+"SolvedMessage" = "解けました!";
+
