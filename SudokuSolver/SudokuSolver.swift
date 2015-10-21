@@ -69,9 +69,9 @@ class SudokuSolver {
                 
                 switch (cname[cname.startIndex]) {
                 case "C":
-                    cell = Int(cname.substringFromIndex(cname.startIndex.successor())) ?? -1
+                    cell = Int(cname.substringFromIndex(cname.startIndex.successor()))!
                 case "S":
-                    symbol = Int(String(cname[cname.startIndex.successor()])) ?? 0
+                    symbol = Int(String(cname[cname.startIndex.successor()]))!
                 default:
                     break
                 }
