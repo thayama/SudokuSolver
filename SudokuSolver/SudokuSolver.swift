@@ -51,6 +51,7 @@ class SudokuSolver {
         }
         
         let dlx = DancingLinks(matrix: sudokuMatrix)
+        sudokuResult = nil
         dlx.search(0, callback: getResult)
         
         return true
