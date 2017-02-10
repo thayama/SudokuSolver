@@ -10,23 +10,23 @@ import UIKit
 
 class SudokuEditorViewController: UIViewController {
     @IBOutlet var boardButtons: [UIButton]!
-    private var selectedBoardButton : UIButton?
-    private var boardButtonIndex: [UIButton] = [UIButton]()
-    private var gameData : SudokuGame!
-    private let userDefaults = NSUserDefaults.standardUserDefaults()
-    private var nullData = [Int]()
+    fileprivate var selectedBoardButton : UIButton?
+    fileprivate var boardButtonIndex: [UIButton] = [UIButton]()
+    fileprivate var gameData : SudokuGame!
+    fileprivate let userDefaults = UserDefaults.standard
+    fileprivate var nullData = [Int]()
 
     // Constants
-    private let GameData = "GameData"
-    private let ClearDialogTitle = NSLocalizedString("ClearDialogTitle", comment: "Title of all clear dialog")
-    private let ClearDialogMessage = NSLocalizedString("ClearDialogMessage", comment: "Message of all clear dialog")
-    private let OkButton = NSLocalizedString("Accept", comment: "OK button")
-    private let CancelButton = NSLocalizedString("Cancel", comment: "Cancel button")
-    private let ClearAll = NSLocalizedString("ClearAll", comment: "Clear all action")
+    fileprivate let GameData = "GameData"
+    fileprivate let ClearDialogTitle = NSLocalizedString("ClearDialogTitle", comment: "Title of all clear dialog")
+    fileprivate let ClearDialogMessage = NSLocalizedString("ClearDialogMessage", comment: "Message of all clear dialog")
+    fileprivate let OkButton = NSLocalizedString("Accept", comment: "OK button")
+    fileprivate let CancelButton = NSLocalizedString("Cancel", comment: "Cancel button")
+    fileprivate let ClearAll = NSLocalizedString("ClearAll", comment: "Clear all action")
 
     override func viewDidLoad() {
-        var check = [Bool](count: boardButtons.count, repeatedValue: false)
-        boardButtonIndex = [UIButton](count: boardButtons.count, repeatedValue: boardButtons[0])
+        var check = [Bool](repeating: false, count: boardButtons.count)
+        boardButtonIndex = [UIButton](repeating: boardButtons[0], count: boardButtons.count)
         
         for button in boardButtons {
             if check[button.tag]  {
@@ -39,87 +39,87 @@ class SudokuEditorViewController: UIViewController {
         
         print("total=\(boardButtons.count) buttons")
 
-        nullData = [Int](count: boardButtons.count, repeatedValue: 0)
-        setGameData(userDefaults.arrayForKey(GameData) as? [Int] ?? nullData)
+        nullData = [Int](repeating: 0, count: boardButtons.count)
+        setGameData(userDefaults.array(forKey: GameData) as? [Int] ?? nullData)
     }
     
-    override func canBecomeFirstResponder() -> Bool {
+    override var canBecomeFirstResponder : Bool {
         return true
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         becomeFirstResponder()
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         resignFirstResponder()
         
-        userDefaults.setObject(gameData.data, forKey: GameData)
+        userDefaults.set(gameData.data, forKey: GameData)
         userDefaults.synchronize()
     }
     
-    @IBAction func clearButtonPressed(sender: UIBarButtonItem) {
-        let clearDialog = UIAlertController(title: ClearDialogTitle, message: ClearDialogMessage, preferredStyle: UIAlertControllerStyle.Alert)
+    @IBAction func clearButtonPressed(_ sender: UIBarButtonItem) {
+        let clearDialog = UIAlertController(title: ClearDialogTitle, message: ClearDialogMessage, preferredStyle: UIAlertControllerStyle.alert)
         
-        let okAction = UIAlertAction(title: OkButton, style: UIAlertActionStyle.Default) { (action) -> Void in
+        let okAction = UIAlertAction(title: OkButton, style: UIAlertActionStyle.default) { (action) -> Void in
             self.clearData(self.nullData)
         }
-        let cancelAction = UIAlertAction(title: CancelButton, style: UIAlertActionStyle.Cancel) { (action) -> Void in
+        let cancelAction = UIAlertAction(title: CancelButton, style: UIAlertActionStyle.cancel) { (action) -> Void in
             print("cancelled")
         }
         
         clearDialog.addAction(okAction)
         clearDialog.addAction(cancelAction)
 
-        presentViewController(clearDialog, animated: true, completion: nil)
+        present(clearDialog, animated: true, completion: nil)
     }
     
-    func setGameData(data: [Int]) {
+    func setGameData(_ data: [Int]) {
         gameData = SudokuGame(data: data)
-        for (index, symbol) in data.enumerate() {
-            boardButtonIndex[index].setTitle(symbol == 0 ? nil : "\(symbol)", forState: UIControlState.Normal)
+        for (index, symbol) in data.enumerated() {
+            boardButtonIndex[index].setTitle(symbol == 0 ? nil : "\(symbol)", for: UIControlState())
         }
     }
     
-    func clearData(data: [Int]) {
-        undoManager?.registerUndoWithTarget(self, selector: Selector("clearData:"), object: gameData.data)
+    func clearData(_ data: [Int]) {
+        undoManager?.registerUndo(withTarget: self, selector: #selector(SudokuEditorViewController.clearData(_:)), object: gameData.data)
         undoManager?.setActionName(ClearAll)
         setGameData(data)
     }
     
-    @IBAction func boardButtonPressed(sender: UIButton) {
+    @IBAction func boardButtonPressed(_ sender: UIButton) {
         let previousButton = selectedBoardButton
         if selectedBoardButton != sender {
-            UIView.animateWithDuration(0.25, animations: { () -> Void in
-                sender.backgroundColor = UIColor.yellowColor()
+            UIView.animate(withDuration: 0.25, animations: { () -> Void in
+                sender.backgroundColor = UIColor.yellow
             })
             selectedBoardButton = sender
         } else {
             selectedBoardButton = nil
         }
-        previousButton?.backgroundColor = UIColor.whiteColor()
+        previousButton?.backgroundColor = UIColor.white
     }
 
-    @IBAction func numberButtonPressed(sender: UIButton) {
+    @IBAction func numberButtonPressed(_ sender: UIButton) {
         guard let button = selectedBoardButton else { return }
         
         let number = sender.tag
         
         if gameData.setSymbol(sender.tag, atCell: button.tag) {
-            button.setTitle(number != 0 ? "\(number)" : nil, forState: UIControlState.Normal)
+            button.setTitle(number != 0 ? "\(number)" : nil, for: UIControlState())
         } else {
-            UIView.animateWithDuration(0.1, animations: { () -> Void in
-                sender.backgroundColor = UIColor.redColor()
+            UIView.animate(withDuration: 0.1, animations: { () -> Void in
+                sender.backgroundColor = UIColor.red
                 }, completion: { (ignore) -> Void in
-                    sender.backgroundColor = UIColor.whiteColor()
+                    sender.backgroundColor = UIColor.white
             })
         }
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let srvc = segue.destinationViewController as? SudokuResultViewController {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let srvc = segue.destination as? SudokuResultViewController {
             srvc.gameData = gameData
         }
     }

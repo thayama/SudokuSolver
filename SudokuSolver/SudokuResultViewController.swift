@@ -14,14 +14,14 @@ class SudokuResultViewController: UIViewController {
     @IBOutlet weak var timeLabel: UILabel!
     var cells = [UILabel]()
     var knownCells = [Bool]()
-    var solver : SudokuSolver?
-    var duration : NSTimeInterval = 0
+    var solver: SudokuSolver?
+    var duration: TimeInterval = 0
     
     var gameData : SudokuGame? {
         didSet {
             if let data = gameData {
-                knownCells = [Bool](count: data.maxCells, repeatedValue: false)
-                for (index, cell) in data.data.enumerate() {
+                knownCells = [Bool](repeating: false, count: data.maxCells)
+                for (index, cell) in data.data.enumerated() {
                     knownCells[index] = (cell != 0)
                 }
             } else {
@@ -38,14 +38,14 @@ class SudokuResultViewController: UIViewController {
             return
         }
         
-        cells = [UILabel](count: cellLabels.count, repeatedValue: cellLabels[0])
+        cells = [UILabel](repeating: cellLabels[0], count: cellLabels.count)
         for cell in cellLabels {
             cells[cell.tag] = cell
         }
         
         activityIndicator.startAnimating()
-        timeLabel.hidden = true
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { self.solve() }
+        timeLabel.isHidden = true
+        DispatchQueue.global(qos: DispatchQoS.default.qosClass).async { self.solve() }
         
         title = NSLocalizedString("ComputingMessage", comment: "Computing a solution")
     }
@@ -53,42 +53,45 @@ class SudokuResultViewController: UIViewController {
     func solve() {
         guard let data = gameData else { return }
         
-        let start = NSDate()
+        let start = Date()
         
         solver = SudokuSolver(n: 3)
-        solver?.setSudokuData(data.data)
         
-        duration = NSDate().timeIntervalSinceDate(start)
-        
-        print("time=\(duration)")
-        
-        solver?.showResult()
-        
-        dispatch_async(dispatch_get_main_queue()) { self.updateUI() }
+        if solver!.setSudokuData(data.data) {
+            duration = Date().timeIntervalSince(start)
+            
+            print("time=\(duration)")
+            
+            solver!.showResult()
+            
+            DispatchQueue.main.async { self.updateUI() }
+        } else {
+            print("Failed to set puzzle data.")
+        }
     }
     
     func updateUI() {
         activityIndicator.stopAnimating()
         
-        let formatter = NSNumberFormatter()
-        formatter.numberStyle = NSNumberFormatterStyle.DecimalStyle
-        if let time = formatter.stringFromNumber(Int(round(duration * 1000))) {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = NumberFormatter.Style.decimal
+        if let time = formatter.string(from: NSNumber(integerLiteral: Int(round(duration * 1000)))) {
             timeLabel.text = time + " msec"
-            timeLabel.hidden = false
+            timeLabel.isHidden = false
         }
         
         if let result = solver?.sudokuResult {
-            for (index, cell) in knownCells.enumerate() {
+            for (index, cell) in knownCells.enumerated() {
                 cells[index].text = "\(result[index])"
-                cells[index].textColor = cell ? UIColor.lightGrayColor() : UIColor.blackColor()
+                cells[index].textColor = cell ? UIColor.lightGray : UIColor.black
             }
             title = NSLocalizedString("SolvedMessage", comment: "Found the solution")
         } else {
-            for (index, cell) in knownCells.enumerate() where cell == true {
+            for (index, cell) in knownCells.enumerated() where cell == true {
                 if let symbol = gameData?.data[index] {
                     cells[index].text = String(symbol)
                 }
-                cells[index].textColor = UIColor.lightGrayColor()
+                cells[index].textColor = UIColor.lightGray
             }
             title = NSLocalizedString("NoSolutionMessage", comment: "No solution found")
             showNoSolutionDialog()
@@ -100,9 +103,9 @@ class SudokuResultViewController: UIViewController {
         let noSolutionDialogMessage = NSLocalizedString("NoSolutionDialogMessage", comment: "Message of no solution dialog")
         let okButton = NSLocalizedString("Accept", comment: "OK button")
         
-        let noSolutionDialog = UIAlertController(title: noSolutionDialogTitle, message: noSolutionDialogMessage, preferredStyle: UIAlertControllerStyle.Alert)
-        let okAction = UIAlertAction(title: okButton, style: UIAlertActionStyle.Default, handler: nil)
+        let noSolutionDialog = UIAlertController(title: noSolutionDialogTitle, message: noSolutionDialogMessage, preferredStyle: UIAlertControllerStyle.alert)
+        let okAction = UIAlertAction(title: okButton, style: UIAlertActionStyle.default, handler: nil)
         noSolutionDialog.addAction(okAction)
-        presentViewController(noSolutionDialog, animated: true, completion: nil)
+        present(noSolutionDialog, animated: true, completion: nil)
     }
 }

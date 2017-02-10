@@ -13,18 +13,18 @@
 		3F594ADB1BCCF886001CC319 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F594ADA1BCCF886001CC319 /* Assets.xcassets */; };
 		3F594ADE1BCCF886001CC319 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F594ADC1BCCF886001CC319 /* LaunchScreen.storyboard */; };
 		3F594AF41BCCF886001CC319 /* SudokuSolverUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F594AF31BCCF886001CC319 /* SudokuSolverUITests.swift */; };
-		3F594B031BCCF8B9001CC319 /* DancingLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F594B011BCCF8B9001CC319 /* DancingLinks.swift */; settings = {ASSET_TAGS = (); }; };
-		3F594B041BCCF8B9001CC319 /* SudokuSolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F594B021BCCF8B9001CC319 /* SudokuSolver.swift */; settings = {ASSET_TAGS = (); }; };
-		3F594B061BCCFA29001CC319 /* SudokuEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F594B051BCCFA29001CC319 /* SudokuEditorViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		3F65CCB41BCD0F1800885421 /* SudokuGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F65CCB31BCD0F1800885421 /* SudokuGame.swift */; settings = {ASSET_TAGS = (); }; };
-		3F65CCB61BD0CD4500885421 /* SudokuResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F65CCB51BD0CD4500885421 /* SudokuResultViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		3F594B031BCCF8B9001CC319 /* DancingLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F594B011BCCF8B9001CC319 /* DancingLinks.swift */; };
+		3F594B041BCCF8B9001CC319 /* SudokuSolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F594B021BCCF8B9001CC319 /* SudokuSolver.swift */; };
+		3F594B061BCCFA29001CC319 /* SudokuEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F594B051BCCFA29001CC319 /* SudokuEditorViewController.swift */; };
+		3F65CCB41BCD0F1800885421 /* SudokuGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F65CCB31BCD0F1800885421 /* SudokuGame.swift */; };
+		3F65CCB61BD0CD4500885421 /* SudokuResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F65CCB51BD0CD4500885421 /* SudokuResultViewController.swift */; };
 		3FCA2EF01BD60A6C00762A0F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3FCA2EF21BD60A6C00762A0F /* Localizable.strings */; };
 		3FCA2EF51BD60A6C00762A0F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3FCA2EF71BD60A6C00762A0F /* InfoPlist.strings */; };
 		3FCA2EFA1BD60A6C00762A0F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3FCA2EFC1BD60A6C00762A0F /* InfoPlist.strings */; };
 		3FCA2EFF1BD60A6D00762A0F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3FCA2F011BD60A6D00762A0F /* InfoPlist.strings */; };
-		3FCA2F041BD74E4800762A0F /* SudokuGameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FCA2F031BD74E4800762A0F /* SudokuGameTests.swift */; settings = {ASSET_TAGS = (); }; };
-		3FCA2F071BD7774600762A0F /* SudokuSolverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FCA2F051BD7774600762A0F /* SudokuSolverTests.swift */; settings = {ASSET_TAGS = (); }; };
-		3FCA2F081BD7774600762A0F /* DancingLinksTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FCA2F061BD7774600762A0F /* DancingLinksTests.swift */; settings = {ASSET_TAGS = (); }; };
+		3FCA2F041BD74E4800762A0F /* SudokuGameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FCA2F031BD74E4800762A0F /* SudokuGameTests.swift */; };
+		3FCA2F071BD7774600762A0F /* SudokuSolverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FCA2F051BD7774600762A0F /* SudokuSolverTests.swift */; };
+		3FCA2F081BD7774600762A0F /* DancingLinksTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FCA2F061BD7774600762A0F /* DancingLinksTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -223,18 +223,21 @@
 		3F594AC51BCCF886001CC319 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "IGEL Co.,Ltd.";
 				TargetAttributes = {
 					3F594ACC1BCCF886001CC319 = {
 						CreatedOnToolsVersion = 7.0.1;
+						LastSwiftMigration = 0820;
 					};
 					3F594AE31BCCF886001CC319 = {
 						CreatedOnToolsVersion = 7.0.1;
+						LastSwiftMigration = 0820;
 						TestTargetID = 3F594ACC1BCCF886001CC319;
 					};
 					3F594AEE1BCCF886001CC319 = {
 						CreatedOnToolsVersion = 7.0.1;
+						LastSwiftMigration = 0820;
 						TestTargetID = 3F594ACC1BCCF886001CC319;
 					};
 				};
@@ -397,6 +400,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -406,8 +410,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -442,6 +448,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -451,8 +458,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -471,6 +480,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -484,6 +494,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = jp.co.igel.SudokuSolver;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -495,6 +506,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = jp.co.igel.SudokuSolver;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -506,6 +518,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = jp.co.igel.SudokuSolverTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SudokuSolver.app/SudokuSolver";
 			};
 			name = Debug;
@@ -518,6 +531,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = jp.co.igel.SudokuSolverTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SudokuSolver.app/SudokuSolver";
 			};
 			name = Release;
@@ -529,6 +543,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = jp.co.igel.SudokuSolverUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = SudokuSolver;
 				USES_XCTRUNNER = YES;
 			};
@@ -541,6 +556,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = jp.co.igel.SudokuSolverUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = SudokuSolver;
 				USES_XCTRUNNER = YES;
 			};

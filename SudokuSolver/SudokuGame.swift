@@ -9,8 +9,8 @@
 import Foundation
 
 class SudokuGame {
-    private var gameData : [Int]
-    private let n : Int
+    fileprivate var gameData : [Int]
+    fileprivate let n : Int
     let size : Int
     let maxCells : Int
     
@@ -18,27 +18,27 @@ class SudokuGame {
         return gameData
     }
     
-    private var rows : [Int]
-    private var columns : [Int]
-    private var boxes : [Int]
+    fileprivate var rows : [Int]
+    fileprivate var columns : [Int]
+    fileprivate var boxes : [Int]
     
     init?(data: [Int]) {
         n = Int(sqrt(sqrt(Double(data.count))))
         size = n * n
         maxCells = data.count
-        self.gameData = [Int](count: data.count, repeatedValue: 0)
+        self.gameData = [Int](repeating: 0, count: data.count)
         
-        rows = [Int](count: size, repeatedValue: 0)
-        columns = [Int](count: size, repeatedValue: 0)
-        boxes = [Int](count: size, repeatedValue: 0)
+        rows = [Int](repeating: 0, count: size)
+        columns = [Int](repeating: 0, count: size)
+        boxes = [Int](repeating: 0, count: size)
         
         if size > 32 || size * size != data.count || !setSymbolData(data) {
             return nil
         }
     }
     
-    private func setSymbolData(data: [Int]) -> Bool {
-        for (index, symbol) in data.enumerate() {
+    fileprivate func setSymbolData(_ data: [Int]) -> Bool {
+        for (index, symbol) in data.enumerated() {
             if !setSymbol(symbol, atCell: index) {
                 return false
             }
@@ -46,7 +46,7 @@ class SudokuGame {
         return true
     }
 
-    func setSymbol(symbol: Int, atCell cell: Int) -> Bool {
+    func setSymbol(_ symbol: Int, atCell cell: Int) -> Bool {
         guard symbol >= 0 && symbol <= size &&
             cell >= 0 && cell < maxCells else { return false }
 

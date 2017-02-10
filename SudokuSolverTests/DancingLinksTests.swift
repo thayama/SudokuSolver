@@ -41,15 +41,15 @@ class DancingLinksTests: XCTestCase {
         2 : ["E", "F", "C"]
     ]
     
-    func checkResult(result: [DancingLinksNode]) {
+    func checkResult(_ result: [DancingLinksNode]) {
         checkResult(result, expectedResult: expectedResult)
     }
 
-    func checkResult2(result: [DancingLinksNode]) {
+    func checkResult2(_ result: [DancingLinksNode]) {
         checkResult(result, expectedResult: expectedResult2)
     }
 
-    func checkResult(result: [DancingLinksNode], expectedResult: [Int:[String]]) {
+    func checkResult(_ result: [DancingLinksNode], expectedResult: [Int:[String]]) {
         var n = 0
         for node in result {
             var r = node
@@ -84,7 +84,7 @@ class DancingLinksTests: XCTestCase {
     func testPerformance() {
         // This is an example of a performance test case.
         let dlx : DancingLinks = DancingLinks(matrix: testData2)
-        self.measureBlock {
+        self.measure {
             dlx.search(0)
         }
     }

@@ -13,7 +13,7 @@ class SudokuGameTests: XCTestCase {
     
     // ok case (1) - null data
     func testInitNullData() {
-        if let gameData = SudokuGame(data: [Int](count: 81, repeatedValue: 0)) {
+        if let gameData = SudokuGame(data: [Int](repeating: 0, count: 81)) {
             for symbol in gameData.data {
                 XCTAssert(symbol == 0)
             }
@@ -36,7 +36,7 @@ class SudokuGameTests: XCTestCase {
             0, 8, 3, 0, 0, 0, 0, 0, 0
         ]
         if let gameData = SudokuGame(data: goodData) {
-            for (index, symbol) in gameData.data.enumerate() {
+            for (index, symbol) in gameData.data.enumerated() {
                 XCTAssert(goodData[index] == symbol)
             }
         } else {
@@ -46,7 +46,7 @@ class SudokuGameTests: XCTestCase {
     
     // bad case (1) - illeagal symbol
     func testInitBadSymbol() {
-        var data = [Int](count: 81, repeatedValue: 0)
+        var data = [Int](repeating: 0, count: 81)
         data[20] = 13
         XCTAssert(SudokuGame(data: data) == nil)
     }
@@ -54,28 +54,28 @@ class SudokuGameTests: XCTestCase {
     // bad case (2) - bad size
     func testInitBadSize() {
         // too small
-        XCTAssert(SudokuGame(data: [Int](count: 80, repeatedValue: 0)) == nil)
+        XCTAssert(SudokuGame(data: [Int](repeating: 0, count: 80)) == nil)
         
         // too big
-        XCTAssert(SudokuGame(data: [Int](count: 82, repeatedValue: 0)) == nil)
+        XCTAssert(SudokuGame(data: [Int](repeating: 0, count: 82)) == nil)
     }
     
     // bad case (4) - duplicated symbols
     func testInitDuplicateSymbols() {
         // row
-        var data = [Int](count: 81, repeatedValue: 0)
+        var data = [Int](repeating: 0, count: 81)
         data[0] = 1
         data[1] = 1
         XCTAssert(SudokuGame(data: data) == nil)
     
         // column
-        data = [Int](count: 81, repeatedValue: 0)
+        data = [Int](repeating: 0, count: 81)
         data[0] = 1
         data[9] = 1
         XCTAssert(SudokuGame(data: data) == nil)
 
         // box
-        data = [Int](count: 81, repeatedValue: 0)
+        data = [Int](repeating: 0, count: 81)
         data[0] = 1
         data[20] = 1
         XCTAssert(SudokuGame(data: data) == nil)

@@ -9,8 +9,8 @@
 import Foundation
 
 class SudokuSolver {
-    private let size : Int
-    private let n : Int
+    fileprivate let size : Int
+    fileprivate let n : Int
     var sudokuResult : [Int]?
     
     init(n: Int) {
@@ -18,7 +18,7 @@ class SudokuSolver {
         size = n * n
     }
     
-    func createRowForSymbol(symbol: Int, atCell cell: Int) -> [String] {
+    func createRowForSymbol(_ symbol: Int, atCell cell: Int) -> [String] {
         return [
             "C\(cell)",
             "S\(symbol)R\(cell / size)",
@@ -27,7 +27,7 @@ class SudokuSolver {
         ]
     }
     
-    func setSudokuData(data: [Int]) -> Bool {
+    func setSudokuData(_ data: [Int]) -> Bool {
         guard data.count == size * size else { return false }
         
         var sudokuMatrix = [Int:[String]]()
@@ -38,16 +38,18 @@ class SudokuSolver {
             switch s {
             case 0:
                 for symbol in 1...size {
-                    sudokuMatrix[row++] = createRowForSymbol(symbol, atCell: c)
+                    sudokuMatrix[row] = createRowForSymbol(symbol, atCell: c)
+                    row += 1
                 }
                 
             case 1...size:
-                sudokuMatrix[row++] = createRowForSymbol(s, atCell: c)
+                sudokuMatrix[row] = createRowForSymbol(s, atCell: c)
+                row += 1
                 
             default:
                 return false
             }
-            c++
+            c += 1
         }
         
         let dlx = DancingLinks(matrix: sudokuMatrix)
@@ -57,8 +59,8 @@ class SudokuSolver {
         return true
     }
     
-    func getResult(result: [DancingLinksNode]) {
-        sudokuResult = [Int](count: size * size, repeatedValue: 0)
+    func getResult(_ result: [DancingLinksNode]) {
+        sudokuResult = [Int](repeating: 0, count: size * size)
 
         for o in result {
             var node = o
@@ -69,9 +71,9 @@ class SudokuSolver {
                 
                 switch (cname[cname.startIndex]) {
                 case "C":
-                    cell = Int(cname.substringFromIndex(cname.startIndex.successor()))!
+                    cell = Int(cname.substring(from: cname.characters.index(after: cname.startIndex)))!
                 case "S":
-                    symbol = Int(String(cname[cname.startIndex.successor()]))!
+                    symbol = Int(String(cname[cname.characters.index(after: cname.startIndex)]))!
                 default:
                     break
                 }

@@ -20,14 +20,15 @@ class DancingLinksNode : Hashable {
     var hashValue : Int
     
     init() {
-        self.hashValue = ++DancingLinksNode.hashSeed
+        DancingLinksNode.hashSeed += 1
+        self.hashValue = DancingLinksNode.hashSeed
         self.R = self
         self.L = self
         self.D = self
         self.U = self
     }
 
-    func linkVirticalNode(node: DancingLinksNode) {
+    func linkVirticalNode(_ node: DancingLinksNode) {
         if let column = self as? DancingLinksColumn {
             node.C = column
         }
@@ -35,10 +36,10 @@ class DancingLinksNode : Hashable {
         node.D = self
         self.U.D = node
         self.U = node
-        node.C?.size++
+        node.C?.size += 1
     }
     
-    func linkHorizontalNode(node: DancingLinksNode) {
+    func linkHorizontalNode(_ node: DancingLinksNode) {
         // link to the row
         node.L = self.L
         node.R = self
@@ -63,13 +64,13 @@ class DancingLinksColumn : DancingLinksNode {
         self.C = self
     }
     
-    func addColumnWithName(name: String) -> DancingLinksColumn {
+    func addColumnWithName(_ name: String) -> DancingLinksColumn {
         let column = DancingLinksColumn(name: name)
         linkHorizontalNode(column)
         return column
     }
     
-    func findColumnWithName(name: String) -> DancingLinksColumn {
+    func findColumnWithName(_ name: String) -> DancingLinksColumn {
         if let column = columns[name] {
             return column
         }
@@ -84,30 +85,30 @@ class DancingLinksColumn : DancingLinksNode {
         
         var row = self.D
         while row !== self {
-            var node = row.R
+            var node = row?.R
             while node !== row {
-                node.D.U = node.U
-                node.U.D = node.D
-                node.C.size--
+                node?.D.U = node?.U
+                node?.U.D = node?.D
+                node?.C.size -= 1
 
-                node = node.R
+                node = node?.R
             }
-            row = row.D
+            row = row?.D
         }
     }
     
     func uncover() {
         var row = self.U
         while row !== self {
-            var node = row.L
+            var node = row?.L
             while node !== row {
-                node.C.size++
-                node.D.U = node
-                node.U.D = node
+                node?.C.size += 1
+                node?.D.U = node
+                node?.U.D = node
 
-                node = node.L
+                node = node?.L
             }
-            row = row.U
+            row = row?.U
         }
         
         self.R.L = self
@@ -137,7 +138,7 @@ class DancingLinks {
         }
     }
     
-    private func addNodeToColumn(columnNode: DancingLinksColumn, atRow rowNumber: Int) {
+    fileprivate func addNodeToColumn(_ columnNode: DancingLinksColumn, atRow rowNumber: Int) {
         let node = DancingLinksNode()
         
         columnNode.linkVirticalNode(node)
@@ -151,11 +152,11 @@ class DancingLinks {
     
     var O = [DancingLinksNode]()
     
-    func search(k: Int) {
+    func search(_ k: Int) {
         search(k, callback: printResult)
     }
     
-    func search(k: Int, callback: ([DancingLinksNode]) -> Void) {
+    func search(_ k: Int, callback: ([DancingLinksNode]) -> Void) {
         if header.R === header {
             callback(O)
             return
@@ -170,22 +171,22 @@ class DancingLinks {
         var r = c.D
         while r !== c {
             if O.count > k {
-                O.removeAtIndex(k)
+                O.remove(at: k)
             }
-            O.insert(r, atIndex: k)
+            O.insert(r!, at: k)
 
-            var j = r.R
+            var j = r?.R
             while j !== r {
-                j.C.cover()
-                j = j.R
+                j?.C.cover()
+                j = j?.R
             }
             search(k + 1, callback: callback)
-            j = r.L
+            j = r?.L
             while j !== r {
-                j.C.uncover()
-                j = j.L
+                j?.C.uncover()
+                j = j?.L
             }
-            r = r.D
+            r = r?.D
         }
         c.uncover()
     }
@@ -205,7 +206,7 @@ class DancingLinks {
         return selectedColumn
     }
     
-    func printResult(O : [DancingLinksNode]) {
+    func printResult(_ O : [DancingLinksNode]) {
         for node in O {
             var r = node
             repeat {
@@ -224,18 +225,18 @@ class DancingLinks {
             columns.append(column.name)
             column = column.R as! DancingLinksColumn
         }
-        print("\(columns.sort())⏎")
+        print("\(columns.sorted())⏎")
         
-        let sortedRows = self.rows.sort{ $0.0 < $1.0 }
+        let sortedRows = self.rows.sorted{ $0.0 < $1.0 }
         for (rowNumber, nodeHead) in sortedRows {
             var rows = [String]()
             rows.append(nodeHead.C.name)
             var node = nodeHead.R
             while node !== nodeHead {
-                rows.append(node.C.name)
-                node = node.R
+                rows.append((node?.C.name)!)
+                node = node?.R
             }
-            print("\(rowNumber): \(rows.sort())⏎")
+            print("\(rowNumber): \(rows.sorted())⏎")
         }
     }
 }
